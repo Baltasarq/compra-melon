@@ -1,0 +1,20 @@
+/** (c) 2020 compra-melon MIT License Baltasar <baltasarq@gmail.com> */
+
+.content-card, .dialog-card {
+    padding: 10px;
+    margin: 10px;
+    width: 80%;
+}
+
+.dialog-card {
+    width: 50%;
+}
+
+.single-card {
+    justify-content: center;
+}
+
+.mdl-card__actions {
+    text-align: right;
+    justify-content: right;
+}

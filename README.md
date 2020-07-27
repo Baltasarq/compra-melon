@@ -1,2 +1,3 @@
 # compra-melon
-A tool to easily mantain a shopping list
+
+A tool to easily mantain a shared shopping list.

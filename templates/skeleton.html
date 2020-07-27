@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" type="text/css" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+        <link rel="stylesheet" type="text/css" href="/templates/styles.css">
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <title>{{ info.Name }}</title>
+        <meta NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW" />
+</head>
+<body>
+<!-- Generate login/logout URL -->
+{% set user_is_admin = users.is_current_user_admin() %}
+
+{% if usr %}
+    {% set login_logout_url = users.create_logout_url("/") %}
+{% else %}
+    {% set login_logout_url = users.create_login_url("/") %}
+{% endif %}
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <!-- Header -->
+    <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">{{ info.Title }}</span>
+    </div>
+    </header>
+
+    <!-- Drawer -->
+    <div class="mdl-layout__drawer">
+        <!-- Drawer's title -->
+        <table><tr>
+            <td><img alt="{{ info.Title }}" height="64px" width="64px" src="/res/cart.svg"></td>
+        <td><span class="mdl-layout-title">{{ info.Title }}</span></td>
+        </tr></table>
+
+        <!-- Navigation pane -->
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="{{ login_logout_url }}">
+                <i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">
+                        {% if usr %}
+                            logout
+                        {% else %}
+                            login
+                        {% endif %}
+                </i>
+                {% if usr %}
+                    {{ usr.nickname() }}
+                {% else %}
+                    login
+                {% endif %}
+                </a>
+        {% block navigation %}
+        {% endblock %}
+        </nav>
+    </div>
+
+    <!-- Contents -->
+    <main class="mdl-layout__content">
+    <div id="dvContents">
+        {% block content %}
+        {% endblock %}
+    </div>
+    </main>
+</div>
+</body>
+</html>

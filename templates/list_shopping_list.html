@@ -1,0 +1,36 @@
+{% extends "skeleton.html" %}
+{% block content %}
+<div class="mdl-grid single-card">
+<div class="mdl-card mdl-shadow--8dp content-card">
+    <div class="mdl-card__title">
+        <h1 class="mdl-card__title-text">Shopping lists</h1>
+    </div>
+
+    <div>
+    <ul class="demo-list-item mdl-list">
+        {% if usr %}
+        {% for shopping_list in shopping_lists %}
+            <li class="mdl-list__item">
+            <span class="mdl-list__item-primary-content">
+                {% include "shopping_list_entry.html" %}
+            </span>
+            <a class="mdl-list__item-secondary-action" href="/shopping_lists/share?id={{ shopping_list.key.urlsafe() }}"><i class="material-icons">share</i></a>
+            <a class="mdl-list__item-secondary-action" href="/sure?msg=Delete: {{ shopping_list.name }}&url_back=/&url=/shopping_lists/delete?id={{ shopping_list.key.urlsafe() }}"><i class="material-icons">delete</i></a>
+            </li>
+        {% else %}
+            <tr><td colspan="3">No lists.</td></tr>
+        {% endfor %}
+        {% endif %}
+    </ul>
+    </div>
+    {% if usr %}
+        <div class="mdl-card__actions">
+            <button onclick="window.location.href='/shopping_lists/new'"
+                    class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+                <i class="material-icons" role="presentation">add</i>
+            </button>
+        </div>
+    {% endif %}
+</div>
+</div>
+{% endblock %}
